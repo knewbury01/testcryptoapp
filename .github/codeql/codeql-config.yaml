@@ -3,7 +3,7 @@ name: "My CodeQL config"
 disable-default-queries: true
 
 packs:
-  - knewbury01/java-crypto-newmodel-queries
+  - knewbury01/java-crypto-newmodel-queries@0.0.1
 
 query-filters:
   - exclude:
