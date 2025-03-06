@@ -181,8 +181,13 @@ jobs:
           OUTPUT_DIR: ${{ runner.temp }}/graph_output
         shell: bash
         run: |
+          echo "-----------------------------"
           echo -e "Checking CodeQL Version:"
           $QLT_CODEQL_PATH --version
+          echo -e "Checking database path:"
+          ls $DATABASE_PATH
+          ls home/runner/work/_temp/codeql_databases/java
+          echo "-----------------------------"
           python3 scripts/generate_cbom.py -c "$QLT_CODEQL_PATH" -d "$DATABASE_PATH" -q "$QUERY_FILE" -o "$OUTPUT_DIR"
 
       - name: Upload cbom
