@@ -176,7 +176,7 @@ jobs:
 
       - name: Generate CBOM
         env:
-          DATABASE_PATH: /home/runner/work/_temp/codeql_databases/java
+          DATABASE_PATH: home/runner/work/_temp/codeql_databases/java
           QUERY_FILE: /home/runner/.codeql/packages/knewbury01/java-crypto-newmodel-queries/0.0.1/queries/PrintCBOMGraph.ql
           OUTPUT_DIR: ${{ runner.temp }}/graph_output
         shell: bash
