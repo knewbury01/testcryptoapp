@@ -98,57 +98,6 @@ jobs:
         with:
           category: "/language:${{matrix.language}}"
 
-      - name: Zip CodeQL database
-        id: codeql-database-bundle
-        run: |
-          set -xu
-          CODEQL_DATABASE="/home/runner/work/_temp/codeql_databases/java"
-          DATABASE_DIR="/home/runner/work/_temp/codeql_databases"
-
-          for SUB_DIR in log results working; do
-            rm -rf $DATABASE_DIR/$SUB_DIR
-          done
-
-          CODEQL_DATABASE_ZIP="codeql-database-java.zip"
-          zip -r "$CODEQL_DATABASE_ZIP" "$CODEQL_DATABASE"
-
-          echo "::set-output name=zip::$CODEQL_DATABASE_ZIP"
-
-      - name: Upload CodeQL database
-        uses: actions/upload-artifact@v4
-        with:
-          name: java-db
-          path: ${{ steps.codeql-database-bundle.outputs.zip }}
-
-  buildcbom:
-    name: Build CBOM
-    runs-on: ${{ (matrix.language == 'swift' && 'macos-latest') || 'ubuntu-latest' }}
-    needs: analyze
-    permissions:
-      # required for all workflows
-      security-events: write
-
-      # required to fetch internal or private CodeQL packs
-      packages: read
-
-      # only required for workflows in private repositories
-      actions: read
-      contents: read
-
-    strategy:
-      fail-fast: false
-    steps:
-      - name: Download CodeQL database
-        uses: actions/download-artifact@v4
-        with:
-          name: java-db
-          path: /home/runner/work/_temp/codeql_databases/
-
-      - name: Unzip CodeQL database
-        run: |
-          ls java-db
-          unzip java-db -d java
-
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
