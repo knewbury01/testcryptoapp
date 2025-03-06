@@ -4,3 +4,7 @@ disable-default-queries: true
 
 packs:
   - knewbury01/java-crypto-newmodel-queries
+
+query-filters:
+  - exclude:
+      id: java/print-cbom-graph
