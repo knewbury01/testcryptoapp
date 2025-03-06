@@ -126,7 +126,7 @@ jobs:
           $QLT_CODEQL_PATH --version
           python3 scripts/generate_cbom.py -c "$QLT_CODEQL_PATH" -d "$DATABASE_PATH" -q "$QUERY_FILE" -o "$OUTPUT_DIR"
 
-      - name: Upload query list
+      - name: Upload cbom
         uses: actions/upload-artifact@v4
         with:
           name: graph_output
