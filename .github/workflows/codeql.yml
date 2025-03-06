@@ -102,7 +102,7 @@ jobs:
         id: codeql-database-bundle
         run: |
           set -xu
-          CODEQL_DATABASE="/home/runner/work/_temp/codeql_databases/java
+          CODEQL_DATABASE="/home/runner/work/_temp/codeql_databases/java"
           DATABASE_DIR="/home/runner/work/_temp/codeql_databases"
 
           for SUB_DIR in log results working; do
